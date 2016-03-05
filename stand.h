@@ -21,7 +21,6 @@ class Stand
       return n;
     }
     
-
     // Drukt bord af op het scherm.
     void drukaf ();
 
@@ -47,16 +46,15 @@ class Stand
     // Controleert of de stand een eindstand is of niet.
     bool eindstand ();
     
-    
-
+    char bell{7};
     char bord[3][NMAX];
     char aanDeBeurt;
     
-
   private:
-    int n;  // feitelijke aantal kolommen van het bord   
-     //Maximale grootte bord
-  
+    // feitelijke aantal kolommen van het bord   
+    //Maximale grootte bord
+    int n;
+      
     char wit = 'W', zwart = 'Z', leeg = ' ';
   
 

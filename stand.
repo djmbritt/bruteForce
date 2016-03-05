@@ -32,7 +32,7 @@ void Stand::drukaf (){
   }
   cout << "┼" << endl;
     
-  //numbers row top
+  //numbers row
   for(auto p=0; p<=n; p++){  
     if(p<10){
       cout << "│ " << p << " ";
@@ -62,7 +62,6 @@ void Stand::drukaf (){
     cout << "┼" << endl;
   }
   
-  //number row bottom
   for(auto p=0; p<=n; p++){
     if(p<10){
       cout << "│ " << p << " ";
@@ -70,17 +69,16 @@ void Stand::drukaf (){
       cout << "│" << p << " ";
     }
   }
-  cout << "│" << endl;
+  cout << "┼";
   
-  //line 5 (last line)
   for(int p=0; p<=n; p++){
-    cout << "┼───";
+    cout << "┼";
   }
   cout << "┼";  
   
-  //player indicator
   cout << endl << "Aan de beurt: "
-       << ((aanDeBeurt == wit) ? "Wit" : "Zwart");
+       << ((aanDeBeurt == wit) ? "Wit" : "Zwart")
+       << endl << endl;
   
 }
 
@@ -102,58 +100,21 @@ int Stand::winst (int &aantal)
 // Doet een zet voor pion in kolom `kolom'.
 // Handig om verschillende versies te maken voor een slagzet
 // en een gewone zet
-
-//Sigui traha riba doezet, mi a purba implementa e for loop na cuminsamento 
-//pero e no ta trahando manera mi ker, mi tin cu incorpora e if statement mas abouw
-// cu e if(bord[1][kolom] == leeg), hunto cu e for loop.
-// tin parti nan di e logica cu ta overlap cu otro anto nan mester wordo incorpora mas miho cu otro.
-// ademas tin parti nan overbodig y cu ta pafo di e scope di e regla nan cu no ta cuadra.
-
 void Stand::doezet (int kolom){
-  
-  for(int i=0; i<=n; i++){
-    if(bord[1][i] != leeg){
-      if(aanDeBeurt == wit){
-        if(bord[2][i-1] == zwart || bord[2][kolom+1] == zwart){
-          cout << bell << "Slaan is verplicht!" << kolom << endl;
-          return;
-        }else{
-          bord[2][kolom] = leeg;
-          bord[1][((kolom-1 == zwart) ? kolom-1 : kolom+1)] = aanDeBeurt;
-          aanDeBeurt = zwart;
-          return;
-        }
-      }else{//aanDeBeurt == zwart
-        if(bord[0][i-1] == wit || bord[0][i+1] == wit){
-          cout << bell << "Slaan is verplicht!" << endl;
-          return;
-        }else{
-          bord[0][kolom] = leeg;
-          bord[1][((kolom-1 == wit) ? kolom-1 : kolom+1)] = aanDeBeurt;
-          aanDeBeurt = wit;
-          return;
-        }
-      }  
-    }else{
-      break;
-    }
-  }
-  
+
   if(bord[1][kolom] == leeg){
     
     if(aanDeBeurt == wit){
       if(bord[2][kolom] == leeg){
-        cout << bell << "Zet niet mogelijk." << endl;
-        return;
+        cout << "Zet niet mogelijk." << endl;
       } else {
         bord[1][kolom] = aanDeBeurt;
         bord[2][kolom] = leeg;
         aanDeBeurt = zwart;
       }
-    }else{//aanDeBeurt == zwart
+    }else{
       if(bord[0][kolom] == leeg){
-        cout << bell << "Zet is niet mogelijk." << endl;
-        return;
+        cout << "Zet is niet mogelijk." << endl;
       } else {
         bord[1][kolom] = aanDeBeurt;
         bord[0][kolom] = leeg;
@@ -161,8 +122,7 @@ void Stand::doezet (int kolom){
       }
     }
   } else {
-    cout << bell << "Veld is niet leeg." << endl;
-    return;
+    cout << "Veld is niet leeg." << endl;
   }
 }
 
