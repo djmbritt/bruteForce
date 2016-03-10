@@ -108,10 +108,34 @@ int Stand::winst (int &aantal)
 // cu e if(bord[1][kolom] == leeg), hunto cu e for loop.
 // tin parti nan di e logica cu ta overlap cu otro anto nan mester wordo incorpora mas miho cu otro.
 // ademas tin parti nan overbodig y cu ta pafo di e scope di e regla nan cu no ta cuadra.
+bool Stand::moetslaan (int kolom){
+  if(aanDeBeurt == wit){
+    if(bord[2][kolom-1] != leeg && bord[2][kolom+1] != leeg){
+      cout << aanDeBeurt <<  " moet slaan!" << bell;
+      return false;
+    } else {
+      return true;
+    }
+  }else{
+    if(bord[0][kolom-1] != leeg && bord[0][kolom+1] != leeg){
+      cout << aanDeBeurt << "moet slaan!" << bell;
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
 
 void Stand::doezet (int kolom){
-  
-  for(int i=0; i<=n; i++){
+  int i;
+  for(i=0; i<=n; i++){
+    if(bord[1][i] != leeg){
+      cout << "Je moet slaan!" << endl
+           << aanDeBeurt << " heeft een steen die op rij: " << i 
+           << " geslagen moet worden." << endl; 
+      return;
+    }  
+  }
     if(bord[1][i] != leeg){
       if(aanDeBeurt == wit){
         if(bord[2][i-1] == zwart || bord[2][kolom+1] == zwart){
@@ -134,12 +158,7 @@ void Stand::doezet (int kolom){
           return;
         }
       }  
-    }else{
-      break;
-    }
-  }
-  
-  if(bord[1][kolom] == leeg){
+    }else if(bord[1][kolom] == leeg){
     
     if(aanDeBeurt == wit){
       if(bord[2][kolom] == leeg){
@@ -164,6 +183,7 @@ void Stand::doezet (int kolom){
     cout << bell << "Veld is niet leeg." << endl;
     return;
   }
+  
 }
 
 // Bepaalt een `beste' zet door voor alle mogelijke directe vervolgstanden
