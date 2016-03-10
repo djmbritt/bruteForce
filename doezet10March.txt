@@ -1,0 +1,59 @@
+void Stand::doezet (int kolom){
+  int i;
+  for(i=0; i<=n; i++){
+    if(bord[1][i] != leeg){
+      cout << "Je moet slaan!" << endl
+           << aanDeBeurt << " heeft een steen die op rij: " << i 
+           << " geslagen moet worden." << endl; 
+      return;
+    }  
+  }
+    if(bord[1][i] != leeg){
+      if(aanDeBeurt == wit){
+        if(bord[2][i-1] == zwart || bord[2][kolom+1] == zwart){
+          cout << bell << "Slaan is verplicht!" << kolom << endl;
+          return;
+        }else{
+          bord[2][kolom] = leeg;
+          bord[1][((kolom-1 == zwart) ? kolom-1 : kolom+1)] = aanDeBeurt;
+          aanDeBeurt = zwart;
+          return;
+        }
+      }else{//aanDeBeurt == zwart
+        if(bord[0][i-1] == wit || bord[0][i+1] == wit){
+          cout << bell << "Slaan is verplicht!" << endl;
+          return;
+        }else{
+          bord[0][kolom] = leeg;
+          bord[1][((kolom-1 == wit) ? kolom-1 : kolom+1)] = aanDeBeurt;
+          aanDeBeurt = wit;
+          return;
+        }
+      }  
+    }else if(bord[1][kolom] == leeg){
+    
+    if(aanDeBeurt == wit){
+      if(bord[2][kolom] == leeg){
+        cout << bell << "Zet niet mogelijk." << endl;
+        return;
+      } else {
+        bord[1][kolom] = aanDeBeurt;
+        bord[2][kolom] = leeg;
+        aanDeBeurt = zwart;
+      }
+    }else{//aanDeBeurt == zwart
+      if(bord[0][kolom] == leeg){
+        cout << bell << "Zet is niet mogelijk." << endl;
+        return;
+      } else {
+        bord[1][kolom] = aanDeBeurt;
+        bord[0][kolom] = leeg;
+        aanDeBeurt = wit;
+      }
+    }
+  } else {
+    cout << bell << "Veld is niet leeg." << endl;
+    return;
+  }
+  
+}
